@@ -4,7 +4,18 @@
 
 Never lose a vibe again! Recover deleted files, browse your coding history, and restore any version of your code from Cursor's local history.
 
-![Vibe Check Screenshot](media/screenshot.png)
+---
+
+## 📸 Screenshots
+
+### Preview with Syntax Highlighting
+![Preview](screenshots/preview.png)
+
+### Version History Dropdown
+![Version Dropdown](screenshots/version-dropdown.png)
+
+### Side-by-Side Diff View
+![Diff View](screenshots/diff-view.png)
 
 ---
 
