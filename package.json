@@ -1,0 +1,191 @@
+{
+  "name": "vibe-check",
+  "displayName": "Vibe Check",
+  "description": "Git for vibe coders - Never lose a vibe! Recover deleted files, browse version history, and restore any version of your code from Cursor's local history.",
+  "version": "1.0.0",
+  "publisher": "AdityaDhande",
+  "icon": "media/circle-check-big.png",
+  "galleryBanner": {
+    "color": "#7c3aed",
+    "theme": "dark"
+  },
+  "engines": {
+    "vscode": "^1.85.0"
+  },
+  "categories": [
+    "Other"
+  ],
+  "keywords": [
+    "vibe",
+    "cursor",
+    "recovery",
+    "history",
+    "restore",
+    "backup",
+    "undo",
+    "file recovery",
+    "local history",
+    "vibe coding",
+    "ai coding",
+    "version control"
+  ],
+  "activationEvents": [
+    "onStartupFinished"
+  ],
+  "main": "./out/extension.js",
+  "contributes": {
+    "viewsContainers": {
+      "activitybar": [
+        {
+          "id": "vibe-check",
+          "title": "Vibe Check",
+          "icon": "media/vibe-check-icon.svg"
+        }
+      ]
+    },
+    "views": {
+      "vibe-check": [
+        {
+          "id": "vibeCheckExplorer",
+          "name": "Your Vibes"
+        }
+      ]
+    },
+    "commands": [
+      {
+        "command": "vibeCheck.refresh",
+        "title": "Refresh Vibes",
+        "icon": "$(refresh)"
+      },
+      {
+        "command": "vibeCheck.preview",
+        "title": "Preview Vibe",
+        "icon": "$(eye)"
+      },
+      {
+        "command": "vibeCheck.recover",
+        "title": "Recover Vibe",
+        "icon": "$(save)"
+      },
+      {
+        "command": "vibeCheck.recoverAll",
+        "title": "Recover All Vibes",
+        "icon": "$(save-all)"
+      },
+      {
+        "command": "vibeCheck.copyContent",
+        "title": "Copy Content",
+        "icon": "$(copy)"
+      },
+      {
+        "command": "vibeCheck.showDiff",
+        "title": "Compare Vibes",
+        "icon": "$(diff)"
+      },
+      {
+        "command": "vibeCheck.selectProject",
+        "title": "Select Project",
+        "icon": "$(folder)"
+      },
+      {
+        "command": "vibeCheck.olderVersion",
+        "title": "← Older",
+        "icon": "$(arrow-left)"
+      },
+      {
+        "command": "vibeCheck.newerVersion",
+        "title": "Newer →",
+        "icon": "$(arrow-right)"
+      },
+      {
+        "command": "vibeCheck.recoverCurrentFile",
+        "title": "Recover",
+        "icon": "$(save)"
+      },
+      {
+        "command": "vibeCheck.copyCurrentContent",
+        "title": "Copy",
+        "icon": "$(copy)"
+      }
+    ],
+    "menus": {
+      "view/title": [
+        {
+          "command": "vibeCheck.selectProject",
+          "when": "view == vibeCheckExplorer",
+          "group": "navigation@1"
+        },
+        {
+          "command": "vibeCheck.refresh",
+          "when": "view == vibeCheckExplorer",
+          "group": "navigation@2"
+        },
+        {
+          "command": "vibeCheck.recoverAll",
+          "when": "view == vibeCheckExplorer",
+          "group": "navigation@3"
+        }
+      ],
+      "view/item/context": [
+        {
+          "command": "vibeCheck.preview",
+          "when": "view == vibeCheckExplorer && viewItem == file",
+          "group": "inline@1"
+        },
+        {
+          "command": "vibeCheck.recover",
+          "when": "view == vibeCheckExplorer && viewItem == file",
+          "group": "inline@2"
+        },
+        {
+          "command": "vibeCheck.copyContent",
+          "when": "view == vibeCheckExplorer && viewItem == file",
+          "group": "1_actions@1"
+        },
+        {
+          "command": "vibeCheck.showDiff",
+          "when": "view == vibeCheckExplorer && viewItem == file",
+          "group": "1_actions@2"
+        }
+      ]
+    },
+    "configuration": {
+      "title": "Vibe Check",
+      "properties": {
+        "vibeCheck.showEmptyVersions": {
+          "type": "boolean",
+          "default": false,
+          "description": "Show empty file versions in history"
+        },
+        "vibeCheck.defaultRecoveryPath": {
+          "type": "string",
+          "default": "",
+          "description": "Default folder for recovered files (empty = ask each time)"
+        }
+      }
+    }
+  },
+  "scripts": {
+    "vscode:prepublish": "npm run compile",
+    "compile": "tsc -p ./",
+    "watch": "tsc -watch -p ./",
+    "lint": "eslint src --ext ts"
+  },
+  "devDependencies": {
+    "@types/node": "^20.10.0",
+    "@types/vscode": "^1.85.0",
+    "@typescript-eslint/eslint-plugin": "^6.13.0",
+    "@typescript-eslint/parser": "^6.13.0",
+    "eslint": "^8.54.0",
+    "typescript": "^5.3.0"
+  },
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/addyfu/vibe-check"
+  },
+  "bugs": {
+    "url": "https://github.com/addyfu/vibe-check/issues"
+  },
+  "homepage": "https://github.com/addyfu/vibe-check#readme",
+  "license": "MIT"
+}
