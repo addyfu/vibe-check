@@ -34,11 +34,12 @@ Never lose a vibe again! Recover deleted files, browse your coding history, and 
 
 Ever had that moment when:
 - 😱 You accidentally deleted a file
-- 🤦 You lost code changes before committing
-- 🔄 Cursor crashed and you lost unsaved work
-- 🤷 You want to see "how did I do this last week?"
+- 🤦 Forgot to commit even when you have Git
+- 🔄 Cursor crashed or deleted your files
+- 🧪 Did a quick POC without setting up Git
+- 💡 Want to see "how did I do this last week?"
 
-**Vibe Check has your back!** Cursor automatically saves versions of your files as you code. This extension lets you access that hidden history.
+**Vibe Check has your back!** Cursor automatically saves versions of your files as you code. This extension lets you access that hidden history - no Git required!
 
 ---
 
