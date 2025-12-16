@@ -274,49 +274,84 @@ export class PreviewPanel {
         .toolbar {
             background: #252526;
             border-bottom: 1px solid #3c3c3c;
-            padding: 10px 16px;
+            padding: 8px 12px;
             display: flex;
             align-items: center;
-            gap: 10px;
+            gap: 8px;
             flex-shrink: 0;
-            min-height: 48px;
+            min-height: 44px;
+            flex-wrap: wrap;
+            overflow: hidden;
+        }
+        
+        .toolbar-left {
+            display: flex;
+            align-items: center;
+            gap: 8px;
+            flex-shrink: 1;
+            min-width: 0;
+            overflow: hidden;
+        }
+        
+        .toolbar-center {
+            display: flex;
+            align-items: center;
+            gap: 6px;
+            flex-shrink: 0;
+        }
+        
+        .toolbar-right {
+            display: flex;
+            align-items: center;
+            gap: 6px;
+            flex-shrink: 0;
+            margin-left: auto;
         }
         
         .file-info {
-            font-size: 14px;
+            font-size: 13px;
             font-weight: 600;
             color: #e0e0e0;
-            padding: 6px 14px;
+            padding: 5px 10px;
             background: #3c3c3c;
             border-radius: 4px;
             white-space: nowrap;
+            overflow: hidden;
+            text-overflow: ellipsis;
+            max-width: 180px;
+            flex-shrink: 1;
+            min-width: 60px;
         }
         
         .version-select {
-            font-size: 13px;
-            padding: 6px 12px;
+            font-size: 12px;
+            padding: 5px 8px;
             background: #3c3c3c;
             color: #4ec9b0;
             border: 1px solid #4a4a4a;
             border-radius: 4px;
             cursor: pointer;
             outline: none;
-            min-width: 220px;
+            min-width: 140px;
+            max-width: 220px;
+            flex-shrink: 1;
         }
         .version-select:hover { background: #4a4a4a; }
         .version-select:focus { border-color: #0e639c; }
         
         .btn {
-            padding: 6px 14px;
+            padding: 5px 10px;
             border: none;
             border-radius: 4px;
-            font-size: 13px;
+            font-size: 12px;
             cursor: pointer;
             transition: background 0.15s;
             font-family: inherit;
             background: #3c3c3c;
             color: #ccc;
             font-weight: 500;
+            white-space: nowrap;
+            flex-shrink: 0;
         }
         
         .btn:hover:not(:disabled) { background: #4a4a4a; }
@@ -328,9 +363,23 @@ export class PreviewPanel {
         .btn-danger { background: #c42b1c; color: #fff; }
         .btn-danger:hover:not(:disabled) { background: #d63a2b; }
         
-        .sep { width: 1px; height: 24px; background: #4a4a4a; margin: 0 4px; }
-        .spacer { flex: 1; }
-        .meta { font-size: 12px; color: #888; white-space: nowrap; font-weight: 500; }
+        .sep { width: 1px; height: 20px; background: #4a4a4a; margin: 0 2px; flex-shrink: 0; }
+        .spacer { flex: 1; min-width: 8px; }
+        .meta { font-size: 11px; color: #888; white-space: nowrap; font-weight: 500; flex-shrink: 0; }
+        
+        /* Responsive: hide less important elements on narrow widths */
+        @media (max-width: 500px) {
+            .sep { display: none; }
+            .meta { display: none; }
+            .spacer { display: none; }
+            .toolbar { justify-content: flex-start; }
+        }
+        
+        @media (max-width: 400px) {
+            .file-info { max-width: 100px; }
+            .version-select { min-width: 100px; max-width: 140px; }
+            .btn { padding: 5px 8px; font-size: 11px; }
+        }
         
         /* Code container */
         .code-container {
@@ -374,22 +423,25 @@ export class PreviewPanel {
 <body>
     <div class="wrapper">
     <div class="toolbar">
-        <span class="file-info">${fileName}</span>
+        <div class="toolbar-left">
+            <span class="file-info" title="${fileName}">${fileName}</span>
+            <select class="version-select" onchange="selectVersion(this.value)" title="Select version">
+                ${versionOptions}
+            </select>
+        </div>
         
-        <select class="version-select" onchange="selectVersion(this.value)" title="Select version">
-            ${versionOptions}
-        </select>
+        <div class="toolbar-center">
+            <div class="sep"></div>
+            <button class="btn" onclick="send('older')" ${isOldestDisabled ? 'disabled' : ''} title="View older version">← Older</button>
+            <button class="btn" onclick="send('newer')" ${isNewestDisabled ? 'disabled' : ''} title="View newer version">Newer →</button>
+            <div class="sep"></div>
+        </div>
         
-        <div class="sep"></div>
-        
-        <button class="btn" onclick="send('older')" ${isOldestDisabled ? 'disabled' : ''} title="View older version">← Older</button>
-        <button class="btn" onclick="send('newer')" ${isNewestDisabled ? 'disabled' : ''} title="View newer version">Newer →</button>
-        
-        <div class="sep"></div>
-        
-        <button class="btn" onclick="send('diff')" ${!canDiff ? 'disabled' : ''} title="Compare with previous version">Diff</button>
-        <button class="btn btn-primary" onclick="send('copy')" title="Copy to clipboard">Copy</button>
-        <button class="btn btn-danger" onclick="send('recover')" title="Recover this file">Recover</button>
+        <div class="toolbar-right">
+            <button class="btn" onclick="send('diff')" ${!canDiff ? 'disabled' : ''} title="Compare with previous version">Diff</button>
+            <button class="btn btn-primary" onclick="send('copy')" title="Copy to clipboard">Copy</button>
+            <button class="btn btn-danger" onclick="send('recover')" title="Recover this file">Recover</button>
+        </div>
         
         <div class="spacer"></div>
         <span class="meta">${totalVersions} versions</span>

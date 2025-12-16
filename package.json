@@ -2,7 +2,7 @@
   "name": "vibe-check",
   "displayName": "Vibe Check",
   "description": "Git for vibe coders - Never lose a vibe! Recover deleted files, browse version history, and restore any version of your code from Cursor's local history.",
-  "version": "1.0.0",
+  "version": "1.2.0",
   "publisher": "AdityaDhande",
   "icon": "media/circle-check-big.png",
   "galleryBanner": {
